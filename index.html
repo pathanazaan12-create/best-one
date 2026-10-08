@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>A Little Something 🤍</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500&display=swap');
+
+:root{
+    --bg:#05060d;
+    --text:#f5f4f8;
+    --muted:#a7a7b5;
+    --glass:rgba(255,255,255,.065);
+    --border:rgba(255,255,255,.13);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+    background:var(--bg);
+    color:var(--text);
+    font-family:Inter,sans-serif;
+    overflow:hidden;
+}
+
+/* ================= BACKGROUND ================= */
+
+#space{
+    position:fixed;
+    inset:0;
+    z-index:-10;
+    overflow:hidden;
+    background:
+        radial-gradient(circle at 20% 25%,rgba(98,76,150,.20),transparent 28%),
+        radial-gradient(circle at 80% 75%,rgba(50,95,145,.15),transparent 30%),
+        #05060d;
+}
+
+.star{
+    position:absolute;
+    width:2px;
+    height:2px;
+    border-radius:50%;
+    background:white;
+    opacity:.25;
+}
+
+.star.bright{
+    animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+    0%,100%{
+        opacity:.25;
+        transform:scale(.8);
+    }
+
+    50%{
+        opacity:1;
+        transform:scale(1.8);
+    }
+}
+
+.shooting-star{
+    position:absolute;
+    width:100px;
+    height:1px;
+    background:linear-gradient(90deg,transparent,white);
+    transform:rotate(-35deg);
+    animation:shoot 1.5s linear forwards;
+}
+
+@keyframes shoot{
+    from{
+        opacity:0;
+        transform:translate(0,0) rotate(-35deg);
+    }
+
+    15%{
+        opacity:1;
+    }
+
+    to{
+        opacity:0;
+        transform:translate(-300px,180px) rotate(-35deg);
+    }
+}
+
+/* ================= SCREEN ================= */
+
+.screen{
+    position:absolute;
+    inset:0;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:25px;
+
+    opacity:0;
+    visibility:hidden;
+
+    transform:scale(1.025);
+
+    transition:
+        opacity .8s ease,
+        transform .8s ease,
+        visibility .8s;
+}
+
+.screen.active{
+    opacity:1;
+    visibility:visible;
+    transform:scale(1);
+}
+
+.content{
+    width:min(720px,100%);
+    text-align:center;
+}
+
+/* ================= TYPOGRAPHY ================= */
+
+.eyebrow{
+    color:#8e8e9e;
+
+    font-size:10px;
+    letter-spacing:5px;
+    text-transform:uppercase;
+
+    margin-bottom:25px;
+}
+
+.hero-title{
+    font-family:"Playfair Display",serif;
+
+    font-size:clamp(45px,11vw,90px);
+    font-weight:400;
+
+    line-height:1;
+    letter-spacing:-3px;
+}
+
+.hero-title span{
+    display:block;
+
+    background:linear-gradient(
+        120deg,
+        #fff,
+        #bdb6df,
+        #fff
+    );
+
+    background-size:200%;
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+
+    animation:gradientMove 6s linear infinite;
+}
+
+@keyframes gradientMove{
+    to{
+        background-position:200%;
+    }
+}
+
+.description{
+    max-width:510px;
+
+    margin:28px auto 0;
+
+    color:var(--muted);
+
+    line-height:1.9;
+    font-size:14px;
+}
+
+/* ================= BUTTONS ================= */
+
+.btn{
+    margin-top:35px;
+
+    padding:14px 25px;
+
+    border:1px solid var(--border);
+    border-radius:100px;
+
+    color:white;
+
+    background:rgba(255,255,255,.055);
+
+    backdrop-filter:blur(15px);
+    -webkit-backdrop-filter:blur(15px);
+
+    cursor:pointer;
+
+    font-size:13px;
+    letter-spacing:.5px;
+
+    transition:.35s;
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+
+    background:rgba(255,255,255,.11);
+
+    border-color:rgba(255,255,255,.3);
+}
+
+.btn:active{
+    transform:scale(.97);
+}
+
+/* ================= STAR ================= */
+
+.star-wrap{
+    width:150px;
+    height:150px;
+
+    margin:0 auto 35px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    cursor:pointer;
+
+    position:relative;
+}
+
+.core{
+    width:8px;
+    height:8px;
+
+    background:white;
+
+    border-radius:50%;
+
+    box-shadow:
+        0 0 10px white,
+        0 0 30px white,
+        0 0 70px rgba(180,170,255,.8);
+
+    animation:corePulse 2s infinite;
+}
+
+.ring{
+    position:absolute;
+
+    width:80px;
+    height:80px;
+
+    border:1px solid rgba(255,255,255,.12);
+
+    border-radius:50%;
+
+    animation:ring 4s linear infinite;
+}
+
+@keyframes corePulse{
+    50%{
+        transform:scale(1.7);
+    }
+}
+
+@keyframes ring{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+/* ================= GLASS CARD ================= */
+
+.glass{
+    background:var(--glass);
+
+    border:1px solid var(--border);
+
+    border-radius:28px;
+
+    padding:35px;
+
+    backdrop-filter:blur(25px);
+    -webkit-backdrop-filter:blur(25px);
+
+    box-shadow:
+        0 30px 100px rgba(0,0,0,.45),
+        inset 0 1px rgba(255,255,255,.04);
+}
+
+.card-title{
+    font-family:"Playfair Display",serif;
+
+    font-size:32px;
+    font-weight:400;
+
+    margin-bottom:20px;
+}
+
+.card-text{
+    color:#b9b9c6;
+
+    line-height:1.9;
+
+    font-size:14px;
+}
+
+/* ================= LETTER ================= */
+
+.letter{
+    text-align:left;
+
+    max-height:65vh;
+
+    overflow-y:auto;
+
+    padding-right:5px;
+}
+
+.letter::-webkit-scrollbar{
+    width:3px;
+}
+
+.letter::-webkit-scrollbar-thumb{
+    background:#444454;
+}
+
+.letter p{
+    color:#d2d1db;
+
+    font-size:14px;
+
+    line-height:2;
+
+    margin-bottom:20px;
+}
+
+.cursor{
+    display:inline-block;
+
+    width:1px;
+    height:16px;
+
+    background:white;
+
+    margin-left:3px;
+
+    animation:blink .7s infinite;
+}
+
+@keyframes blink{
+    50%{
+        opacity:0;
+    }
+}
+
+/* ================= CHOICE ================= */
+
+.choice-grid{
+    display:flex;
+
+    gap:12px;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    margin-top:30px;
+}
+
+.choice{
+    min-width:180px;
+
+    padding:16px 20px;
+
+    border-radius:16px;
+
+    border:1px solid var(--border);
+
+    background:rgba(255,255,255,.04);
+
+    color:white;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.choice:hover{
+    background:rgba(255,255,255,.1);
+
+    transform:translateY(-3px);
+}
+
+.choice small{
+    display:block;
+
+    color:#888896;
+
+    margin-top:6px;
+
+    font-size:10px;
+}
+
+/* ================= FINAL ================= */
+
+.final-title{
+    font-family:"Playfair Display",serif;
+
+    font-size:clamp(42px,10vw,75px);
+
+    font-weight:400;
+}
+
+.final-line{
+    color:#aaa9b7;
+
+    max-width:480px;
+
+    line-height:1.9;
+
+    margin:25px auto;
+
+    font-size:14px;
+}
+
+.heart{
+    font-size:42px;
+
+    animation:heartBeat 2s infinite;
+}
+
+@keyframes heartBeat{
+    50%{
+        transform:scale(1.12);
+    }
+}
+
+.footer{
+    margin-top:45px;
+
+    color:#666675;
+
+    font-size:10px;
+
+    letter-spacing:1px;
+}
+
+/* ================= PARTICLES ================= */
+
+.particle{
+    position:fixed;
+
+    bottom:-30px;
+
+    pointer-events:none;
+
+    animation:float 7s linear forwards;
+
+    z-index:30;
+}
+
+@keyframes float{
+    0%{
+        opacity:0;
+
+        transform:
+            translateY(0)
+            scale(.7);
+    }
+
+    15%{
+        opacity:.8;
+    }
+
+    100%{
+        opacity:0;
+
+        transform:
+            translateY(-110vh)
+            scale(1.2);
+    }
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:600px){
+
+    .glass{
+        padding:25px 20px;
+
+        border-radius:23px;
+    }
+
+    .card-title{
+        font-size:27px;
+    }
+
+    .letter p{
+        font-size:13.5px;
+    }
+
+    .description{
+        font-size:13px;
+    }
+
+    .choice{
+        width:100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div id="space"></div>
+
+
+<!-- ================= SCREEN 1 ================= -->
+
+<section class="screen active" id="screen1">
+
+    <div class="content">
+
+        <div class="eyebrow">
+            Something I wanted to say
+        </div>
+
+        <h1 class="hero-title">
+
+            <span>Some things</span>
+
+            <span>are easier to write.</span>
+
+        </h1>
+
+        <p class="description">
+
+            I made this little space for something
+            I couldn't properly put into words.
+
+            There's no pressure to do anything.
+
+            Just read it whenever you feel comfortable. 🤍
+
+        </p>
+
+        <button class="btn" onclick="goTo('screen2')">
+
+            Continue →
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= SCREEN 2 ================= -->
+
+<section class="screen" id="screen2">
+
+    <div class="content">
+
+        <div class="eyebrow">
+            One little thing
+        </div>
+
+        <div
+            class="star-wrap"
+            onclick="goTo('screen3')"
+        >
+
+            <div class="ring"></div>
+
+            <div class="core"></div>
+
+        </div>
+
+        <h2 class="card-title">
+
+            Find the little light ✨
+
+        </h2>
+
+        <p class="card-text">
+
+            There is something waiting inside.
+
+            Tap the light when you're ready. 🤍
+
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ================= SCREEN 3 ================= -->
+
+<section class="screen" id="screen3">
+
+    <div class="content">
+
+        <div class="glass">
+
+            <div class="eyebrow">
+                Before you read this
+            </div>
+
+            <h2 class="card-title">
+
+                You don't have to forgive me.
+
+            </h2>
+
+            <p class="card-text">
+
+                You don't have to reply.<br>
+
+                You don't have to say anything.<br><br>
+
+                I just wanted to say something
+                properly, without expecting anything
+                from you. 🤍
+
+            </p>
+
+            <button
+                class="btn"
+                onclick="startLetter()"
+            >
+
+                Open my message
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= SCREEN 4 ================= -->
+
+<section class="screen" id="screen4">
+
+    <div class="content">
+
+        <div class="glass">
+
+            <div class="card-title">
+
+                A few words I wanted to leave here… 🤍
+
+            </div>
+
+            <div
+                class="letter"
+                id="letter"
+            >
+
+                <!-- Text inserted by JavaScript -->
+
+            </div>
+
+            <div style="text-align:center">
+
+                <button
+                    class="btn"
+                    id="letterButton"
+                    style="display:none"
+                    onclick="goTo('screen5')"
+                >
+
+                    One last thing… ✨
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= SCREEN 5 ================= -->
+
+<section class="screen" id="screen5">
+
+    <div class="content">
+
+        <div class="glass">
+
+            <div class="eyebrow">
+                No pressure
+            </div>
+
+            <h2 class="card-title">
+
+                Can we leave the past with peace? 🌙
+
+            </h2>
+
+            <p class="card-text">
+
+                Whatever you feel is okay.
+
+                You don't owe me an answer.
+
+                I will respect your space either way. 🤍
+
+            </p>
+
+            <div class="choice-grid">
+
+                <button
+                    class="choice"
+                    onclick="finish('understand')"
+                >
+
+                    I understand 🤍
+
+                    <small>
+                        No pressure
+                    </small>
+
+                </button>
+
+                <button
+                    class="choice"
+                    onclick="finish('space')"
+                >
+
+                    I need space 🌙
+
+                    <small>
+                        I respect that
+                    </small>
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= SCREEN 6 ================= -->
+
+<section class="screen" id="screen6">
+
+    <div class="content">
+
+        <div class="eyebrow">
+
+            That's all I wanted to say
+
+        </div>
+
+        <div class="final-title">
+
+            Take care. 🤍
+
+        </div>
+
+        <div class="heart">
+
+            🫶🏻
+
+        </div>
+
+        <p class="final-line">
+
+            No matter how things changed,
+            I'll always be grateful for the friendship
+            and the memories we shared.
+
+        </p>
+
+        <p class="final-line">
+
+            I genuinely hope you're happy,
+            peaceful, and doing well. 🌸🤍
+
+        </p>
+
+        <div class="footer">
+
+            MADE WITH SINCERITY, NOT EXPECTATIONS.
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<script>
+
+/* =====================================================
+   STARS
+===================================================== */
+
+const space = document.getElementById("space");
+
+for(let i = 0; i < 150; i++){
+
+    const star = document.createElement("div");
+
+    star.className = "star";
+
+    star.style.left =
+        Math.random() * 100 + "%";
+
+    star.style.top =
+        Math.random() * 100 + "%";
+
+    if(Math.random() > .88){
+
+        star.classList.add("bright");
+
+    }
+
+    star.style.animationDelay =
+        Math.random() * 4 + "s";
+
+    space.appendChild(star);
+}
+
+
+/* =====================================================
+   SCREEN NAVIGATION
+===================================================== */
+
+function goTo(id){
+
+    document
+        .querySelectorAll(".screen")
+        .forEach(screen => {
+
+            screen.classList.remove("active");
+
+        });
+
+    setTimeout(() => {
+
+        document
+            .getElementById(id)
+            .classList.add("active");
+
+    },100);
+
+    if(id === "screen2"){
+
+        shootingStar();
+
+    }
+
+}
+
+
+/* =====================================================
+   SHOOTING STAR
+===================================================== */
+
+function shootingStar(){
+
+    setTimeout(() => {
+
+        const s =
+            document.createElement("div");
+
+        s.className =
+            "shooting-star";
+
+        s.style.left =
+            (40 + Math.random() * 50) + "%";
+
+        s.style.top =
+            (15 + Math.random() * 35) + "%";
+
+        document.body.appendChild(s);
+
+        setTimeout(() => {
+
+            s.remove();
+
+        },1600);
+
+    },900);
+
+}
+
+
+/* =====================================================
+   LETTER
+===================================================== */
+
+const paragraphs = [
+
+`Hey… Best one 🩷`,
+
+`I've been wanting to say this for a long time. I don't know if these words can change anything, but I still wanted to sincerely apologize. 🙏🏻🤍`,
+
+`You were my best friend, and I genuinely valued the friendship we had. 🫂✨ I miss the conversations, the jokes, the random moments, and all those little memories that once felt so normal. 🌸`,
+
+`I'm not sending this to pressure you to come back, and I'm not expecting anything from you. 🤍 I just wanted to say what I should have said properly a long time ago.`,
+
+`I'm truly sorry for everything. 🥺❤️‍🩹 If I ever hurt you, made you uncomfortable, or crossed a boundary, I'm genuinely sorry.`,
+
+`There is something I really want your help with, and I hope that one day you'll feel comfortable enough to hear me out. 🤍🙏🏻`,
+
+`If you can forgive me someday, I'll be grateful. 🫶🏻 But if you can't, I completely understand. I will respect your decision and your space without arguing or trying to change your mind. 🌙`,
+
+`I know you've changed a lot, and maybe you've made your own boundaries and rules now. 🌙 I understand that you may not want to give time to someone who once hurt you, and I respect that. 🤍 But maybe remember one thing — sometimes people don't really leave; with time, they simply become silent. Some distances aren't created because the memories disappeared, but because life changed and words became harder to say. 🥀`,
+
+`I also want you to know something clearly: I don't have any romantic feelings for you, and I never will. 🤍 You can trust me. I'll always respect you, your boundaries, your personal life, and the choices you make. I'll never interfere or make you uncomfortable. 🙏🏻`,
+
+`I know things have changed, and I respect where you are in life. 🌷 I don't expect anything from you. I just wanted to apologize sincerely and leave these words here with no pressure, no expectations, and no hard feelings. 🤍`,
+
+`Whatever happens from here, I'll always be grateful for the friendship and the memories we shared. 🫂✨ I genuinely hope you're happy, peaceful, and doing well. 🌸🤍`
+
+];
+
+
+/* =====================================================
+   START LETTER
+===================================================== */
+
+function startLetter(){
+
+    goTo("screen4");
+
+    const letter =
+        document.getElementById("letter");
+
+    const button =
+        document.getElementById("letterButton");
+
+    letter.innerHTML = "";
+
+    button.style.display = "none";
+
+    typeParagraph(0);
+
+}
+
+
+/* =====================================================
+   TYPEWRITER
+===================================================== */
+
+function typeParagraph(index){
+
+    const letter =
+        document.getElementById("letter");
+
+    if(index >= paragraphs.length){
+
+        document
+            .getElementById("letterButton")
+            .style.display = "inline-block";
+
+        return;
+
+    }
+
+    const p =
+        document.createElement("p");
+
+    letter.appendChild(p);
+
+    const text =
+        paragraphs[index];
+
+    let i = 0;
+
+    const cursor =
+        document.createElement("span");
+
+    cursor.className =
+        "cursor";
+
+    p.appendChild(cursor);
+
+
+    function type(){
+
+        if(i < text.length){
+
+            cursor.insertAdjacentText(
+                "beforebegin",
+                text.charAt(i)
+            );
+
+            i++;
+
+            setTimeout(type,18);
+
+        }
+
+        else{
+
+            cursor.remove();
+
+            setTimeout(() => {
+
+                typeParagraph(index + 1);
+
+            },350);
+
+        }
+
+    }
+
+    type();
+
+}
+
+
+/* =====================================================
+   FINAL
+===================================================== */
+
+function finish(type){
+
+    goTo("screen6");
+
+    for(let i = 0; i < 18; i++){
+
+        setTimeout(
+            createParticle,
+            i * 120
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   FLOATING PARTICLES
+===================================================== */
+
+function createParticle(){
+
+    const p =
+        document.createElement("div");
+
+    p.className =
+        "particle";
+
+    const symbols = [
+
+        "🤍",
+        "🩷",
+        "✨",
+        "🌸",
+        "🫶🏻",
+        "🥀"
+
+    ];
+
+    p.textContent =
+        symbols[
+            Math.floor(
+                Math.random() * symbols.length
+            )
+        ];
+
+    p.style.left =
+        Math.random() * 100 + "vw";
+
+    p.style.fontSize =
+        (14 + Math.random() * 15) + "px";
+
+    p.style.animationDuration =
+        (4 + Math.random() * 4) + "s";
+
+    document.body.appendChild(p);
+
+    setTimeout(() => {
+
+        p.remove();
+
+    },8000);
+
+}
+
+
+/* =====================================================
+   AMBIENT PARTICLES
+===================================================== */
+
+setInterval(() => {
+
+    if(document.visibilityState === "visible"){
+
+        createParticle();
+
+    }
+
+},4500);
+
+
+/* =====================================================
+   RANDOM SHOOTING STARS
+===================================================== */
+
+setInterval(() => {
+
+    if(document.visibilityState === "visible"){
+
+        shootingStar();
+
+    }
+
+},9000);
+
+</script>
+
+</body>
+</html>
